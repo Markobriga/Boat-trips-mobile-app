@@ -6,22 +6,15 @@ import Home from './screen/Home';
 import Login from './screen/Login';
 import store from './redux/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { loadUser } from './redux/actions/userAction';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
 
   useEffect(()=>{
-
+    store.dispatch(loadUser())
   },[])
-
-  async function getToken() {
-    try {
-      
-    } catch (error) {
-      console.log("Something went wrong", error)
-    }
-  }
 
   return (
     <Provider store={store}>
