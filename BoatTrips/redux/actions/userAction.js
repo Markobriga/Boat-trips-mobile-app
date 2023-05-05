@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL } from '../constants/userConstants'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL } from '../constants/userConstants'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const baseUrl = "http://127.0.0.1:4000"
 
@@ -38,7 +38,7 @@ export const loadUser = () => async (dispatch) => {
             headers: {
                 "token": token
             }
-        }
+        } 
         const { data } = await axios.get(`${baseUrl}/api/v1/me`, config)
 
         dispatch({
@@ -52,6 +52,23 @@ export const loadUser = () => async (dispatch) => {
             payload: error.response.data.message
         })
     
+    }
+}
+
+export const logout = () => async (dispatch) => {
+    try {
+        await axios.get(`${baseUrl}/api/v1/logout`)
+        await AsyncStorage.removeItem('token')
+
+        dispatch({ 
+            type:LOGOUT_SUCCESS
+        })
+
+    } catch (error) {
+        dispatch({ 
+            type:LOGOUT_FAIL,
+            payload: error.response.data.message 
+        })
     }
 }
 
