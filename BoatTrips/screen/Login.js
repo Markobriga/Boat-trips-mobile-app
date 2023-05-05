@@ -8,15 +8,6 @@ const Login = ({navigation}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const dispatch = useDispatch()
-
-    const { user, isAuthenticated } = useSelector(state=>state.auth)
-
-    useEffect(()=>{
-        console.log(user)
-        if(isAuthenticated) {
-            navigation.replace("Home")
-        }
-    },[dispatch, isAuthenticated])
     
     const loginHandler = () => {
         dispatch(login(email, password))
