@@ -16,9 +16,7 @@ const Main = () => {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        console.log(user?.role)
         if(user?.role === "owner") {
-            console.log(user)
             dispatch(getBoatByOwner(user._id))
         }
         else if(user?.role === "booker") {   
