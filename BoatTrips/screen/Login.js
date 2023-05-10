@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
-import { View, Text, TextInput, TouchableOpacity } from "react-native"
-import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+import { View, Text, TouchableOpacity } from "react-native"
+import { TextInput, Button } from "react-native-paper"
+import { useDispatch } from "react-redux"
 import { login } from "../redux/actions/userAction"
 
 const Login = ({navigation}) => {
@@ -8,6 +9,7 @@ const Login = ({navigation}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const dispatch = useDispatch()
+    const [secure, setSecure] = useState(true)
     
     const loginHandler = () => {
         dispatch(login(email, password))
@@ -15,13 +17,15 @@ const Login = ({navigation}) => {
 
 
     return (
-        <View>
-            <Text>Login</Text>
-            <TextInput autoCapitalize='none' style={{color:"black", paddingLeft: 10, fontSize: 18, borderWidth: 1, marginBottom: 10, borderRadius: 15, paddingHorizontal: 4, borderColor: "grey", backgroundColor: "white", paddingVertical: 4 }} placeholder="Email" value={email} onChangeText={(text) => setEmail(text)} />
-            <TextInput autoCapitalize='none' secureTextEntry={true} style={{ color:"black", paddingLeft: 10, fontSize: 18, borderWidth: 1, marginBottom: 10, borderRadius: 15, paddingHorizontal: 4, borderColor: "grey", backgroundColor: "white", paddingVertical: 4 }} placeholder="Lozinka" value={password} onChangeText={(text) => setPassword(text)} />
-            <TouchableOpacity onPress={loginHandler} style={{ borderRadius: 15, backgroundColor: "dodgerblue", paddingVertical: 10, paddingHorizontal: 12, elevation: 10 }}>
-                <Text style={{ fontSize: 15, color: "white", alignSelf: "center" }}>LOGIN</Text>
-            </TouchableOpacity>
+        <View style={{marginHorizontal:12, flexDirection: "column", flex:1, justifyContent:"center", alignContent:"center"}}>
+            <Text style={{color:"black", textAlign:"center", fontSize:25, fontWeight:500, marginBottom:10}}>Boat Trips</Text>
+            <TextInput autoCapitalize='none' style={{marginTop:5, backgroundColor:"white"}} activeOutlineColor="#06b6d4" theme={{roundness:5}} label="Email" selectionColor="white" mode="outlined" value={email} onChangeText={(text) => setEmail(text)} />
+            <TextInput autoCapitalize='none' secureTextEntry={secure} style={{ marginTop:5, backgroundColor:"white" }} activeOutlineColor="#06b6d4" theme={{roundness:5}} label="Password" selectionColor="white" mode="outlined" value={password} onChangeText={(text) => setPassword(text)} right={
+                <TextInput.Icon icon={secure ? 'eye' : 'eye-off'} onPress={()=>setSecure(!secure)}/>
+            }/>
+            <Button onPress={loginHandler} mode="contained" style={{borderRadius:10, backgroundColor:"#06b6d4", marginTop:20 }}>
+                <Text style={{ fontSize: 15, color: "white", alignSelf: "center" }}>Login</Text>
+            </Button>
 
         </View>
     )

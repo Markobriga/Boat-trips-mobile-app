@@ -24,7 +24,7 @@ function CustomDrawerContent(props) {
          <TouchableOpacity style={{marginHorizontal:10}} onPress={logoutHandler}>
             <Text style={{color:"black", fontWeight:500}}>Logout</Text>
          </TouchableOpacity>
-         <View style={{borderWidth:0.5, marginTop:10, marginHorizontal:10}}></View>
+         <View style={{backgroundColor:"black", height:1, marginTop:10, marginHorizontal:10}}></View>
          <View>
             {props.state.routeNames.map((name, index) => (
                <View style={[index === props.state.index ? {paddingHorizontal:5, marginHorizontal:5, paddingVertical:5, marginVertical:5, borderRadius:10, backgroundColor:"#ecfeff"} : {paddingHorizontal:10, paddingVertical:10}]}>
