@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { loadUser } from './redux/actions/userAction';
 import Main from './screen/Main';
+import { Provider as PaperProvider } from 'react-native-paper'
 
 function App(): JSX.Element {
 
@@ -12,7 +13,9 @@ function App(): JSX.Element {
 
   return (
     <Provider store={store}>
-      <Main />
+      <PaperProvider>
+        <Main />
+      </PaperProvider>
     </Provider>
   );
 }

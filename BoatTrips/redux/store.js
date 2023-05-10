@@ -3,12 +3,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
 import { authReducer } from './reducers/userReducer'
 import { boatByOwnerReducer } from './reducers/boatReducers';
-import { nextTripsByBoatReducer } from './reducers/tripReducers';
+import { nextTripsByBoatReducer, tripDetailsReducer } from './reducers/tripReducers';
 
 const reducer = combineReducers({
     auth: authReducer,
     boatByOwner: boatByOwnerReducer,
-    nextTripsByBoat: nextTripsByBoatReducer
+    nextTripsByBoat: nextTripsByBoatReducer,
+    tripDetails: tripDetailsReducer
 })
 
 let initialState = {}
