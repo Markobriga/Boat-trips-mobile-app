@@ -4,6 +4,7 @@ import Home from './Home';
 import Trips from './Trips';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/userAction';
+import MyReservations from './MyReservations';
 
 const Drawer = createDrawerNavigator();
 
@@ -47,6 +48,7 @@ const MyDrawer = () => {
       <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
          <Drawer.Screen name="Home" component={Home} />
          <Drawer.Screen name="Trips" component={Trips} />
+         <Drawer.Screen name="MyReservations" component={MyReservations} />
       </Drawer.Navigator>
   
    )

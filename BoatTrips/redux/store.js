@@ -4,14 +4,15 @@ import thunk from 'redux-thunk'
 import { authReducer } from './reducers/userReducer'
 import { boatByOwnerReducer } from './reducers/boatReducers';
 import { nextTripsByBoatReducer, tripDetailsReducer } from './reducers/tripReducers';
-import { newReservationReducer } from './reducers/reservationReducers';
+import { bookerReservationsReducer, newReservationReducer } from './reducers/reservationReducers';
 
 const reducer = combineReducers({
     auth: authReducer,
     boatByOwner: boatByOwnerReducer,
     nextTripsByBoat: nextTripsByBoatReducer,
     tripDetails: tripDetailsReducer,
-    newReservation: newReservationReducer
+    newReservation: newReservationReducer,
+    bookerReservations : bookerReservationsReducer
 })
 
 let initialState = {}

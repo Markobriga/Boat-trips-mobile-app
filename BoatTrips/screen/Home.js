@@ -12,11 +12,10 @@ const Home = ({navigation}) => {
     const { boat } = useSelector(state => state.boatByOwner)
 
     useEffect(()=>{
-        const focusHandler = navigation.addListener("focus", ()=> {
-            dispatch(getNextTripsByBoat(boat._id))
-        })
-        return focusHandler
-    },[boat, navigation])
+        
+        dispatch(getNextTripsByBoat(boat._id))
+     
+    },[boat])
 
     return (
         <ScrollView>
