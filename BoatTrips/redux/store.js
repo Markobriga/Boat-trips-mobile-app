@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
 import { authReducer } from './reducers/userReducer'
 import { boatByOwnerReducer } from './reducers/boatReducers';
-import { nextTripsByBoatReducer, tripDetailsReducer } from './reducers/tripReducers';
+import { nextTripsByBoatReducer, tripDetailsReducer, tripsByBoatReducer } from './reducers/tripReducers';
 import { allReservationsReducer, bookerReservationsReducer, newReservationReducer } from './reducers/reservationReducers';
 
 const reducer = combineReducers({
@@ -11,6 +11,7 @@ const reducer = combineReducers({
     boatByOwner: boatByOwnerReducer,
     nextTripsByBoat: nextTripsByBoatReducer,
     tripDetails: tripDetailsReducer,
+    tripsByBoat: tripsByBoatReducer,
     newReservation: newReservationReducer,
     bookerReservations : bookerReservationsReducer,
     allReservations: allReservationsReducer
