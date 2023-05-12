@@ -36,7 +36,7 @@ export const bookerReservations = (startDate, endDate) => async (dispatch, getSt
 
         dispatch({
             type: BOOKER_RESERVATIONS_SUCCESS,
-            payload: data.reservations
+            payload: data
         })
 
     } catch (error) {
