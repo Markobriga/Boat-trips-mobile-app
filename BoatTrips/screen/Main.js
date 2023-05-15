@@ -8,6 +8,7 @@ import MyDrawer from "./MyDrawer";
 import { getBoatByOwner } from "../redux/actions/boatAction";
 import MakeAReservation from "./MakeAReservation";
 import Reservations from "./Reservations";
+import NewBooker from "./NewBooker";
 const { NavigationContainer } = require("@react-navigation/native")
 
 const Stack = createNativeStackNavigator();
@@ -37,6 +38,7 @@ const Main = () => {
                         <Stack.Screen name="MyDrawer" component={MyDrawer} options={{ headerShown: false }}/>
                         <Stack.Screen name="Make a reservation" component={MakeAReservation} />
                         <Stack.Screen name="Reservations" component={Reservations} />
+                        <Stack.Screen name="New Booker" component={NewBooker} />
                     </>
                 ) : (
                     <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
