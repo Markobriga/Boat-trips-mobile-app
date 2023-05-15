@@ -5,7 +5,7 @@ import { allBookers } from '../redux/actions/userAction'
 import { Button, DataTable } from 'react-native-paper';
 import { format } from "date-fns";
 
-const Bookers = () => {
+const Bookers = ({navigation}) => {
 
     const dispatch = useDispatch()
     const { user } = useSelector(state=>state.auth)
@@ -13,11 +13,11 @@ const Bookers = () => {
 
     useEffect(()=> {
         dispatch(allBookers(user._id))
-    },[user])
+    },[user, dispatch])
 
     return (
         <ScrollView>
-            <Button>Add new booker</Button>
+            <Button onPress={()=>navigation.navigate("New Booker")}>Add new booker</Button>
             <DataTable>
                 <DataTable.Header>
                     <DataTable.Title>Name</DataTable.Title>
