@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
-import { allUsersReducer, authReducer } from './reducers/userReducer'
+import { allUsersReducer, authReducer, userReducer } from './reducers/userReducer'
 import { boatByOwnerReducer } from './reducers/boatReducers';
 import { nextTripsByBoatReducer, tripDetailsReducer, tripsByBoatReducer } from './reducers/tripReducers';
 import { allReservationsReducer, bookerReservationsReducer, newReservationReducer } from './reducers/reservationReducers';
@@ -15,7 +15,8 @@ const reducer = combineReducers({
     newReservation: newReservationReducer,
     bookerReservations : bookerReservationsReducer,
     allReservations: allReservationsReducer,
-    allUsers: allUsersReducer
+    allUsers: allUsersReducer,
+    user: userReducer
 })
 
 let initialState = {}
