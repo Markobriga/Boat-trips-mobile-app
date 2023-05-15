@@ -14,7 +14,12 @@ const Trips = ({navigation}) => {
     const { boat } = useSelector(state => state.boatByOwner)
     
     useEffect(()=>{
-        dispatch(getTripsByBoat(user.owner))
+        if(user.role==="booker") {
+            dispatch(getTripsByBoat(user.owner))
+        }
+        else if(user.role==="owner") {
+            dispatch(getTripsByBoat(user._id))
+        }
     },[])
 
     return (
