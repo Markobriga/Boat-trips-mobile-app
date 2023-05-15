@@ -5,6 +5,7 @@ import Trips from './Trips';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/userAction';
 import MyReservations from './MyReservations';
+import Bookers from './Bookers';
 
 const Drawer = createDrawerNavigator();
 
@@ -44,11 +45,18 @@ function CustomDrawerContent(props) {
 }
 
 const MyDrawer = () => {
+
+   const { user } = useSelector(state => state.auth)
+
    return (
       <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
          <Drawer.Screen name="Home" component={Home} />
          <Drawer.Screen name="Trips" component={Trips} />
          <Drawer.Screen name="MyReservations" component={MyReservations} />
+         {user.role === 'owner' && 
+         <>
+            <Drawer.Screen name="Bookers" component={Bookers}/>
+         </>}
       </Drawer.Navigator>
   
    )
