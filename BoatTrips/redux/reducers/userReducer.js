@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, CLEAR_ERRORS } from "../constants/userConstants";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, ALL_BOOKERS_REQUEST, ALL_BOOKERS_SUCCESS, ALL_BOOKERS_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, CLEAR_ERRORS } from "../constants/userConstants";
 
 export const authReducer = (state = {user: {}}, action) => {
     switch (action.type) {
@@ -47,6 +47,36 @@ export const authReducer = (state = {user: {}}, action) => {
                 ...state,
                 error: null
             }
+        default:
+            return state
+    }
+}
+
+export const allUsersReducer = (state = { users: [] }, action) => {
+    switch (action.type) {
+        case ALL_BOOKERS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case ALL_BOOKERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                users: action.payload
+            }
+        case ALL_BOOKERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
         default:
             return state
     }

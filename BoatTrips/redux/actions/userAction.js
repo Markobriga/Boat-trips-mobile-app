@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL } from '../constants/userConstants'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, ALL_BOOKERS_REQUEST, ALL_BOOKERS_SUCCESS, ALL_BOOKERS_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL } from '../constants/userConstants'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const baseUrl = "http://127.0.0.1:4000"
 
@@ -54,6 +54,26 @@ export const loadUser = () => async (dispatch) => {
     
     }
 }
+
+export const allBookers = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: ALL_BOOKERS_REQUEST})
+
+        const { data } = await axios.get(`${baseUrl}/api/v1/owner/bookers/${id}`)
+
+        dispatch({
+            type: ALL_BOOKERS_SUCCESS,
+            payload: data.bookers
+        })
+
+    } catch (error) {
+        dispatch({ 
+            type: ALL_BOOKERS_FAIL, 
+            payload: error.response.data.message 
+        })
+    }
+}
+
 
 export const logout = () => async (dispatch) => {
     try {
