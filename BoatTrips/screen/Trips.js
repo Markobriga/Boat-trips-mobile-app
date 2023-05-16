@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { View, Text, ScrollView, TouchableOpacity } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import { getTripsByBoat } from '../redux/actions/tripAction'
-import { ActivityIndicator } from 'react-native-paper'
+import { ActivityIndicator, Button } from 'react-native-paper'
 import { format } from 'date-fns'
 
 
@@ -20,11 +20,14 @@ const Trips = ({navigation}) => {
         else if(user.role==="owner") {
             dispatch(getTripsByBoat(user._id))
         }
-    },[])
+    },[dispatch])
 
     return (
         <ScrollView>
-            {loading ? <ActivityIndicator animating={true}/> : tripsByBoat.trips && tripsByBoat.trips.map((trip)=>(
+            {loading ? <ActivityIndicator animating={true}/> : 
+            <View>
+                {user.role==="owner" && <Button onPress={()=>{navigation.navigate("New Trip")}}>Add new trip</Button>}
+                {tripsByBoat.trips && tripsByBoat.trips.map((trip)=>(
                 <TouchableOpacity key={trip._id} onPress={()=>{navigation.navigate('Reservations', { id: trip._id})}} style={{marginTop: 5, marginBottom: 5, borderRadius: 15, marginHorizontal: 15 , backgroundColor: "white", shadowRadius: 15, shadowColor: "black", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.16, elevation:1}}>
                     <View style={{flexDirection:"row", justifyContent:"space-between", alignItems:"flex-end", marginHorizontal:15, marginVertical:8}}>
                         <View style={{}}>
@@ -37,7 +40,9 @@ const Trips = ({navigation}) => {
                     </View>
                     
                 </TouchableOpacity>
-            ))}
+                ))}
+            </View>
+            }
         </ScrollView>
     )
 }
