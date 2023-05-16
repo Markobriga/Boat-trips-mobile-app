@@ -29,7 +29,7 @@ const NewBooker = ({navigation}) => {
 
     return (
         <View style={{marginHorizontal:12, flexDirection: "column"}}>
-            <TextInput autoCapitalize='yes' style={{marginTop:5, backgroundColor:"white"}} activeOutlineColor="#06b6d4" theme={{roundness:5}} label="Name" selectionColor="white" mode="outlined" value={name} onChangeText={(text) => setName(text)} />
+            <TextInput autoCapitalize="words" style={{marginTop:5, backgroundColor:"white"}} activeOutlineColor="#06b6d4" theme={{roundness:5}} label="Name" selectionColor="white" mode="outlined" value={name} onChangeText={(text) => setName(text)} />
             <TextInput autoCapitalize='none' style={{marginTop:5, backgroundColor:"white"}} activeOutlineColor="#06b6d4" theme={{roundness:5}} label="Email" selectionColor="white" mode="outlined" value={email} onChangeText={(text) => setEmail(text)} />
             <TextInput autoCapitalize='none' secureTextEntry={secure} style={{ marginTop:5, backgroundColor:"white" }} activeOutlineColor="#06b6d4" theme={{roundness:5}} label="Password" selectionColor="white" mode="outlined" value={password} onChangeText={(text) => setPassword(text)} right={
                 <TextInput.Icon icon={secure ? 'eye' : 'eye-off'} onPress={()=>setSecure(!secure)}/>

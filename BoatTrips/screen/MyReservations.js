@@ -44,19 +44,12 @@ const MyReservations = ({navigation}) => {
     }
 
     return (
-        <ScrollView style={{marginHorizontal:10}}>
-            <View style={{flexDirection:"row"}}>
-                <Text style={{color:"black", fontSize:20}}>Start date: </Text>
-                <Text onPress={()=>setShowStart(1)} style={{color:"black", fontSize:20}}>{format(new Date(startDate), 'dd.MM.yyyy')}</Text>
-                {showStart && <DateTimePicker value={startDate} onChange={changeStart} mode="date"/>}
-            </View>
-            <View style={{flexDirection:"row"}}>
-                <Text style={{color:"black", fontSize:20}}>End date: </Text>
-                <Text onPress={()=>setShowEnd(1)} style={{color:"black", fontSize:20, marginLeft:11}}>{format(new Date(endDate), 'dd.MM.yyyy')}</Text>
-                {showEnd && <DateTimePicker value={endDate} onChange={changeEnd} mode="date"/>}
-            </View>
-            <View style={{backgroundColor:"black", height:1, marginVertical:10}}></View>
-            <View>
+        <ScrollView style={{marginHorizontal:10}}> 
+            <TextInput onPressIn={()=>setShowStart(1)} showSoftInputOnFocus={false} style={{marginTop:5, backgroundColor:"white"}} activeOutlineColor="#06b6d4" theme={{roundness:5}} label="Start Date" selectionColor="white" mode="outlined" value={format(new Date(startDate), 'dd.MM.yyyy')} />
+            {showStart && <DateTimePicker value={startDate} onChange={changeStart} mode="date"/>}
+            <TextInput onPressIn={()=>setShowEnd(1)} showSoftInputOnFocus={false} style={{marginTop:5, backgroundColor:"white"}} activeOutlineColor="#06b6d4" theme={{roundness:5}} label="End Date" selectionColor="white" mode="outlined" value={format(new Date(endDate), 'dd.MM.yyyy')} />
+            {showEnd && <DateTimePicker value={endDate} onChange={changeEnd} mode="date"/>}
+            <View style={{marginVertical:5}}>
                 <Text style={{color:"black"}}>Total Adult: {totalAdult}</Text>
                 <Text style={{color:"black"}}>Total Child: {totalChild}</Text>
             </View>

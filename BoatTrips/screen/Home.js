@@ -15,12 +15,12 @@ const Home = ({navigation}) => {
         
         dispatch(getNextTripsByBoat(boat._id))
      
-    },[boat])
+    },[boat, dispatch])
 
     return (
         <ScrollView>
             {nextTripsByBoat.trips && nextTripsByBoat.trips.map((trip)=> (
-                <TouchableOpacity onPress={()=> {navigation.navigate('Make a reservation', { id: trip._id})}} key={trip._id} style={{ marginTop: 5, marginBottom: 5, borderRadius: 15, paddingHorizontal: 15 , backgroundColor: "white", shadowRadius: 15, shadowColor: "black", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.16, elevation:10 }}>
+                <TouchableOpacity onPress={()=> {navigation.navigate('Make a reservation', { id: trip._id})}} key={trip._id} style={{ marginVertical:5, borderRadius: 15, paddingHorizontal: 15 , marginHorizontal:10, backgroundColor: "white", shadowRadius: 15, shadowColor: "black", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.16, elevation:1 }}>
                     <TripCard trip={trip} maxNumber={boat.maxNumberOfReservations}/>
                 </TouchableOpacity>
             ))}
