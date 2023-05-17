@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, ALL_BOOKERS_REQUEST, ALL_BOOKERS_SUCCESS, ALL_BOOKERS_FAIL, REGISTER_BOOKER_REQUEST, REGISTER_BOOKER_SUCCESS, REGISTER_BOOKER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL } from '../constants/userConstants'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, ALL_BOOKERS_REQUEST, ALL_BOOKERS_SUCCESS, ALL_BOOKERS_FAIL, REGISTER_BOOKER_REQUEST, REGISTER_BOOKER_SUCCESS, REGISTER_BOOKER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PASSWORD_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PASSWORD_FAIL } from '../constants/userConstants'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const baseUrl = "http://127.0.0.1:4000"
 
@@ -52,6 +52,58 @@ export const loadUser = () => async (dispatch) => {
             payload: error.response.data.message
         })
     
+    }
+}
+
+export const updateProfile = (userData) => async (dispatch) => {
+    try {
+
+        dispatch({ type: UPDATE_PROFILE_REQUEST})
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+
+        const { data } = await axios.put(`${baseUrl}/api/v1/me/update`, userData, config)
+
+        dispatch({
+            type: UPDATE_PROFILE_SUCCESS,
+            payload: data.success
+        })
+
+    } catch(error) {
+        dispatch({
+            type: UPDATE_PROFILE_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const updatePassword = (passwords) => async (dispatch) => {
+    try {
+
+        dispatch({ type: UPDATE_PASSWORD_REQUEST})
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.put(`${baseUrl}/api/v1/password/update`, passwords, config)
+
+        dispatch({
+            type: UPDATE_PASSWORD_SUCCESS,
+            payload: data.success
+        })
+
+    } catch(error) {
+        dispatch({
+            type: UPDATE_PASSWORD_FAIL,
+            payload: error.response.data.message
+        })
     }
 }
 
