@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/userAction';
 import MyReservations from './MyReservations';
 import Bookers from './Bookers';
+import { UserIcon } from "react-native-heroicons/outline"
+
 
 const Drawer = createDrawerNavigator();
 
@@ -20,11 +22,12 @@ function CustomDrawerContent(props) {
 
    return (
       <DrawerContentScrollView {...props} safeArea>
-         <View style={{paddingHorizontal:10, paddingVertical:10}}>
-            <Text style={{color:"black"}}>Hi, {user.name}</Text>
-         </View>
+         <TouchableOpacity onPress={()=>props.navigation.navigate("Profile")} style={{paddingHorizontal:10, paddingVertical:10, flexDirection:"row", alignItems:"center"}}>
+            <UserIcon fill="black" color="black"/>
+            <Text style={{color:"black", fontSize:22, fontWeight:300, marginHorizontal:5}}>{user.name}</Text>
+         </TouchableOpacity>
          <TouchableOpacity style={{marginHorizontal:10}} onPress={logoutHandler}>
-            <Text style={{color:"black", fontWeight:500}}>Logout</Text>
+            <Text on style={{color:"black", fontWeight:500, fontSize:22}}>Logout</Text>
          </TouchableOpacity>
          <View style={{backgroundColor:"black", height:1, marginTop:10, marginHorizontal:10}}></View>
          <View>

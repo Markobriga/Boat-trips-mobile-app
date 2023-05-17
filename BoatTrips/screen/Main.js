@@ -10,6 +10,9 @@ import MakeAReservation from "./MakeAReservation";
 import Reservations from "./Reservations";
 import NewBooker from "./NewBooker";
 import NewTrip from "./NewTrip";
+import Profile from "./Profile";
+import EditProfile from "./EditProfile";
+import ChangePassword from "./ChangePassword";
 const { NavigationContainer } = require("@react-navigation/native")
 
 const Stack = createNativeStackNavigator();
@@ -41,6 +44,9 @@ const Main = () => {
                         <Stack.Screen name="Reservations" component={Reservations} />
                         <Stack.Screen name="New Booker" component={NewBooker} />
                         <Stack.Screen name="New Trip" component={NewTrip} />
+                        <Stack.Screen name="Profile" component={Profile} />
+                        <Stack.Screen name="Edit Profile" component={EditProfile} />
+                        <Stack.Screen name="Change Password" component={ChangePassword} />
                     </>
                 ) : (
                     <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
