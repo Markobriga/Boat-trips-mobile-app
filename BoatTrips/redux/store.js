@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import { allUsersReducer, authReducer, userReducer } from './reducers/userReducer'
 import { boatByOwnerReducer } from './reducers/boatReducers';
 import { newTripReducer, nextTripsByBoatReducer, tripDetailsReducer, tripsByBoatReducer } from './reducers/tripReducers';
-import { allReservationsReducer, bookerReservationsReducer, newReservationReducer } from './reducers/reservationReducers';
+import { allReservationsReducer, bookerReservationsReducer, newReservationReducer, reservationReducer } from './reducers/reservationReducers';
 
 const reducer = combineReducers({
     auth: authReducer,
@@ -16,6 +16,7 @@ const reducer = combineReducers({
     newReservation: newReservationReducer,
     bookerReservations : bookerReservationsReducer,
     allReservations: allReservationsReducer,
+    reservation: reservationReducer,
     allUsers: allUsersReducer,
     user: userReducer
 })
