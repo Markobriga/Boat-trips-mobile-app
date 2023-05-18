@@ -24,10 +24,6 @@ const Reservations = ({route, navigation}) => {
                     <Text style={{color:"black"}}>Adults: {reservation.amountAdult}</Text>
                     <Text style={{color:"black"}}>Children: {reservation.amountChild}</Text>
                     <Text style={{color:"black"}}>Price: {reservation.price.toFixed(2)}€</Text>
-                    {user._id === reservation.booker._id && (
-                        <Button>Delete</Button> 
-                    )}
-                    
                 </View>
             ))}
         </ScrollView>

@@ -71,7 +71,7 @@ export const deleteReservation = (id) => async ( dispatch ) => {
 
         dispatch({ type: DELETE_RESERVATION_REQUEST})
 
-        const { data } = await axios.delete(`${baseUrl}/api/v1/booker/reservation${id}`)
+        const { data } = await axios.delete(`${baseUrl}/api/v1/booker/reservation/${id}`)
 
         dispatch({
             type: DELETE_RESERVATION_SUCCESS,
