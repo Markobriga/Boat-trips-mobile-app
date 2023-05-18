@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, REGISTER_BOOKER_REQUEST, REGISTER_BOOKER_SUCCESS, REGISTER_BOOKER_FAIL, ALL_BOOKERS_REQUEST, ALL_BOOKERS_SUCCESS, ALL_BOOKERS_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, CLEAR_ERRORS, UPDATE_PROFILE_REQUEST, UPDATE_PASSWORD_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_RESET, UPDATE_PASSWORD_RESET, UPDATE_PROFILE_FAIL, UPDATE_PASSWORD_FAIL } from "../constants/userConstants";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, REGISTER_BOOKER_REQUEST, REGISTER_BOOKER_SUCCESS, REGISTER_BOOKER_FAIL, ALL_BOOKERS_REQUEST, ALL_BOOKERS_SUCCESS, ALL_BOOKERS_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, CLEAR_ERRORS, UPDATE_PROFILE_REQUEST, UPDATE_PASSWORD_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_RESET, UPDATE_PASSWORD_RESET, UPDATE_PROFILE_FAIL, UPDATE_PASSWORD_FAIL, DELETE_BOOKER_REQUEST, DELETE_BOOKER_SUCCESS, DELETE_BOOKER_FAIL, DELETE_BOOKER_RESET } from "../constants/userConstants";
 
 export const authReducer = (state = {user: {}}, action) => {
     switch (action.type) {
@@ -57,6 +57,7 @@ export const userReducer = (state = {}, action) => {
         case UPDATE_PROFILE_REQUEST:
         case UPDATE_PASSWORD_REQUEST:
         case REGISTER_BOOKER_REQUEST:
+        case DELETE_BOOKER_REQUEST:
             return {
                 ...state,
                 loading: true
@@ -67,6 +68,12 @@ export const userReducer = (state = {}, action) => {
                 ...state,
                 loading: false,
                 isUpdated: action.payload
+            }
+        case DELETE_BOOKER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isDeleted: action.payload
             }
         case REGISTER_BOOKER_SUCCESS:
             return {
@@ -80,9 +87,15 @@ export const userReducer = (state = {}, action) => {
                 ...state,
                 isUpdated: false
             }
+        case DELETE_BOOKER_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
         case UPDATE_PROFILE_FAIL:
         case UPDATE_PASSWORD_FAIL:
         case REGISTER_BOOKER_FAIL:
+        case DELETE_BOOKER_FAIL:
             return {
                 ...state,
                 loading: false,

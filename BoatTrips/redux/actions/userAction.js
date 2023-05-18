@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, ALL_BOOKERS_REQUEST, ALL_BOOKERS_SUCCESS, ALL_BOOKERS_FAIL, REGISTER_BOOKER_REQUEST, REGISTER_BOOKER_SUCCESS, REGISTER_BOOKER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PASSWORD_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PASSWORD_FAIL } from '../constants/userConstants'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, ALL_BOOKERS_REQUEST, ALL_BOOKERS_SUCCESS, ALL_BOOKERS_FAIL, REGISTER_BOOKER_REQUEST, REGISTER_BOOKER_SUCCESS, REGISTER_BOOKER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PASSWORD_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PASSWORD_FAIL, DELETE_BOOKER_REQUEST, DELETE_BOOKER_SUCCESS, DELETE_BOOKER_FAIL } from '../constants/userConstants'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const baseUrl = "http://127.0.0.1:4000"
 
@@ -147,6 +147,26 @@ export const registerBooker = (userData) => async (dispatch) => {
         dispatch({
             type: REGISTER_BOOKER_FAIL,
             payload: error.response.data.message
+        })
+    }
+}
+
+export const deleteBooker = (id) => async (dispatch) => {
+    try {
+
+        dispatch({ type: DELETE_BOOKER_REQUEST})
+
+        const { data } = await axios.delete(`${baseUrl}/api/v1/owner/booker/${id}`)
+
+        dispatch({
+            type: DELETE_BOOKER_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({ 
+            type: DELETE_BOOKER_FAIL, 
+            payload: error.response.data.message 
         })
     }
 }
