@@ -6,6 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns'
 import { newTrip } from "../redux/actions/tripAction";
 import { NEW_TRIP_RESET } from "../redux/constants/tripConstants";
+import Toast from 'react-native-toast-message';
 
 const NewTrip = ({navigation}) => {
 
@@ -14,10 +15,10 @@ const NewTrip = ({navigation}) => {
     const { user } = useSelector(state=>state.auth)
     const { error, success } = useSelector(state => state.newTrip);
 
-    const [name, setName] = useState()
-    const [priceAdult, setPriceAdult] = useState()
-    const [priceChild, setPriceChild] = useState()
-    const [duration, setDuration] = useState()
+    const [name, setName] = useState("")
+    const [priceAdult, setPriceAdult] = useState("")
+    const [priceChild, setPriceChild] = useState("")
+    const [duration, setDuration] = useState("")
     const [locations, setLocations] = useState([])
     const [date, setDate] = useState(new Date())
     const [checkedState, setCheckedState] = useState()
@@ -31,9 +32,20 @@ const NewTrip = ({navigation}) => {
 
     useEffect(()=>{
         if(success) {
-            dispatch({type: NEW_TRIP_RESET})
+            Toast.show({
+                type: "success",
+                text1: "Added new trip"
+            })
+            //dispatch({type: NEW_TRIP_RESET})
+            navigation.navigate("MyDrawer", { screen: 'Trips'})
         }
-    },[success, dispatch])
+        if(error) {
+            Toast.show({
+                type: "error",
+                text1: error
+            })
+        }
+    },[success, error, dispatch])
 
     const changeDate = (event, selectedDate) => {
         if (event.type == "set") {
@@ -74,7 +86,6 @@ const NewTrip = ({navigation}) => {
         formData.set('user', user._id)
 
         dispatch(newTrip(formData))
-        navigation.navigate("MyDrawer", { screen: 'Trips'})
     }
 
     return (

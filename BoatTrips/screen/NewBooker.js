@@ -1,19 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native"
 import { useDispatch, useSelector } from "react-redux";
 import { TextInput, Button } from "react-native-paper"
 import { registerBooker } from "../redux/actions/userAction";
+import Toast from 'react-native-toast-message';
+import { REGISTER_BOOKER_RESET } from "../redux/constants/userConstants"
 
 const NewBooker = ({navigation}) => {
 
     const dispatch = useDispatch()
 
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [secure, setSecure] = useState(true)
 
     const { user } = useSelector(state=>state.auth)
+    const { user:booker, error } = useSelector(state=>state.user)
+
+    useEffect(()=>{
+        if(booker) {
+            Toast.show({
+                type: "success",
+                text1: "Added new booker"
+            })
+            dispatch({type: REGISTER_BOOKER_RESET})
+            navigation.navigate("MyDrawer")
+        }
+        if(error) {
+            Toast.show({
+                type: "error",
+                text1:error
+            })
+        }
+    },[dispatch, booker, error])
 
     const handleSubmit = () => {
         const formData = new FormData()
@@ -24,7 +44,7 @@ const NewBooker = ({navigation}) => {
         formData.set("owner", user._id)
 
         dispatch(registerBooker(formData))
-        navigation.navigate("MyDrawer")
+        
     }
 
     return (

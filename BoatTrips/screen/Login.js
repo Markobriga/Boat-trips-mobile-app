@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity } from "react-native"
 import { TextInput, Button } from "react-native-paper"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { login } from "../redux/actions/userAction"
+import Toast from 'react-native-toast-message';
 
 const Login = ({navigation}) => {
 
@@ -10,6 +11,16 @@ const Login = ({navigation}) => {
     const [password, setPassword] = useState("")
     const dispatch = useDispatch()
     const [secure, setSecure] = useState(true)
+    const { user, error } = useSelector(state=>state.auth)
+
+    useEffect(()=>{
+        if(error) {
+            Toast.show({
+                type: "error",
+                text1: error
+            })
+        }
+    },[dispatch, error])
     
     const loginHandler = () => {
         dispatch(login(email, password))

@@ -39,7 +39,7 @@ export const newTripReducer = (state = {trip: {}}, action) => {
         case NEW_TRIP_SUCCESS:
             return {
                 loading: false,
-                success: action.payload.success,
+                success: action.payload.status,
                 trip: action.payload.trip
             }
 
@@ -52,7 +52,8 @@ export const newTripReducer = (state = {trip: {}}, action) => {
         case NEW_TRIP_RESET:
             return {
                 ...state,
-                success: false
+                loading: false,
+                success: null
             }
 
         case CLEAR_ERRORS:

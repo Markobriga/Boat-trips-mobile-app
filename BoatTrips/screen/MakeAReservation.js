@@ -5,13 +5,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { getTripsDetails } from '../redux/actions/tripAction'
 import { format } from 'date-fns'
 import { createReservation } from '../redux/actions/reservationAction'
+import { CREATE_RESERVATION_RESET } from '../redux/constants/reservationConstants'
+import Toast from 'react-native-toast-message';
 
 const MakeAReservation = ({route, navigation}) => {
 
     const dispatch = useDispatch()
     const { id } = route.params
-    const { loading, error, trip } = useSelector(state=>state.tripDetails)
+    const { loading, trip } = useSelector(state=>state.tripDetails)
     const { user } = useSelector(state=>state.auth)
+    const { order, error } = useSelector(state=>state.newReservation)
 
     const [adult, setAdult] = useState(1)
     const [child, setChild] = useState(0)
@@ -21,8 +24,23 @@ const MakeAReservation = ({route, navigation}) => {
     useEffect(()=>{
 
         dispatch(getTripsDetails(id))
+        if(order) {
+            Toast.show({
+                type:"success",
+                text1:"Created a new reservation"
+            })
+            dispatch({type: CREATE_RESERVATION_RESET})
+            navigation.navigate('MyDrawer')
+        }
+        if (error) {
+            Toast.show({
+                type:"error",
+                text1: error
+            })
+            dispatch({type: CREATE_RESERVATION_RESET})
+        }
 
-    },[dispatch, id])
+    },[dispatch, id, order, error])
 
     const reservationHandler = () => {
         
@@ -38,8 +56,6 @@ const MakeAReservation = ({route, navigation}) => {
 
         dispatch(createReservation(reservation))
 
-        navigation.navigate('MyDrawer')
-
     }
 
 
@@ -54,7 +70,7 @@ const MakeAReservation = ({route, navigation}) => {
                 <TextInput style={{marginTop:5, backgroundColor:"white"}} activeOutlineColor="#06b6d4" theme={{roundness:5}} label="Phone Number" selectionColor="white" mode="outlined" keyboardType="phone-pad" value={phoneNumber} onChangeText={(phoneNumber)=>setPhoneNumber(phoneNumber)}/>
                 <Text style={{marginTop:15, color:"black"}}>Adults (13-80)</Text>
                 <View style={{flexDirection:"row", justifyContent:"flex-start", alignItems:"center"}}>
-                    <Button buttonColor='#06b6d4' style={{borderRadius:10}} disabled={!adult} onPress={()=>setAdult(adult-1)}><Text style={{color:"white", fontSize:20}}>-</Text></Button>
+                    <Button buttonColor='#06b6d4' style={{borderRadius:10}} disabled={adult<2} onPress={()=>setAdult(adult-1)}><Text style={{color:"white", fontSize:20}}>-</Text></Button>
                     <Text style={{color:"black", width:30, textAlign:"center"}}>{adult}</Text>
                     <Button buttonColor='#06b6d4' style={{borderRadius:10}} disabled={adult+child+trip.numberOfReservations>trip.boat.maxNumberOfReservations} onPress={()=>{setAdult(adult+1)}}><Text style={{color:"white", fontSize:20}}>+</Text></Button>
                 </View>
