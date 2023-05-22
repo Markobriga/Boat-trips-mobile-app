@@ -89,7 +89,7 @@ const MyReservations = ({navigation}) => {
             {reservations && reservations.map((reservation)=> (
                 <View key={reservation._id}>
                     <Swipeable renderRightActions={(progress, dragAnimatedValue )=>renderRightActions(progress, dragAnimatedValue, reservation._id)} >
-                        <View on style={{flexDirection:"row", justifyContent:"space-between", marginTop:5}}>
+                        <View style={{flexDirection:"row", justifyContent:"space-between", marginTop:5, borderRadius: 15, paddingHorizontal:15, paddingVertical:3, backgroundColor: "white", shadowRadius: 15, shadowColor: "black", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.16, elevation:2}}>
                             <View>
                                 <Text style={{color:"black", fontWeight:500}}>{reservation.trip.tripName}</Text>
                                 <Text style={{color:"black"}}>Name: {reservation.name}</Text>
@@ -104,7 +104,6 @@ const MyReservations = ({navigation}) => {
                             </View>
                         </View>
                     </Swipeable>
-                    <View style={{backgroundColor:"black", height:1}}></View>
                 </View>
             ))}
         </ScrollView>

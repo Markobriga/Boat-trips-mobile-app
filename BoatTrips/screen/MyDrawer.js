@@ -32,7 +32,7 @@ function CustomDrawerContent(props) {
          <View style={{backgroundColor:"black", height:1, marginTop:10, marginHorizontal:10}}></View>
          <View>
             {props.state.routeNames.map((name, index) => (
-               <View style={[index === props.state.index ? {paddingHorizontal:5, marginHorizontal:5, paddingVertical:5, marginVertical:5, borderRadius:10, backgroundColor:"#ecfeff"} : {paddingHorizontal:10, paddingVertical:10}]}>
+               <View key={index} style={[index === props.state.index ? {paddingHorizontal:5, marginHorizontal:5, paddingVertical:5, marginVertical:5, borderRadius:10, backgroundColor:"#ecfeff"} : {paddingHorizontal:10, paddingVertical:10}]}>
                   <TouchableOpacity  onPress={(event)=> {
                      props.navigation.navigate(name)
                   }}>
@@ -55,7 +55,7 @@ const MyDrawer = () => {
       <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
          <Drawer.Screen name="Home" component={Home} />
          <Drawer.Screen name="Trips" component={Trips} />
-         <Drawer.Screen name="MyReservations" component={MyReservations} />
+         <Drawer.Screen name="My Reservations" component={MyReservations} />
          {user.role === 'owner' && 
          <>
             <Drawer.Screen name="Bookers" component={Bookers}/>
